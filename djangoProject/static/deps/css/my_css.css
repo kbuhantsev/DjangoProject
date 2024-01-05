@@ -1,3 +1,4 @@
+
 body {
   background-image: url("../images/bg-image.jpg");
   background-repeat: no-repeat;
@@ -35,4 +36,11 @@ body {
   top: 80%;
   border-radius: 15px;
   font-size: 0.7rem;
+}
+
+#filter-btn {
+  margin-left: 50%;
+  @media (min-width: 992px) {
+    margin-left: auto;
+  } 
 }
