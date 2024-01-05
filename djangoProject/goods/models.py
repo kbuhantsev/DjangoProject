@@ -33,8 +33,9 @@ class Products(models.Model):
         default=0.00, max_digits=4, decimal_places=2, verbose_name="Скидка в %"
     )
     quantity = models.PositiveIntegerField(default=0, verbose_name="Количество")
-    category = models.ForeignKey(to=Categories, on_delete=models.CASCADE, verbose_name="Категория")
-
+    category = models.ForeignKey(
+        to=Categories, on_delete=models.CASCADE, verbose_name="Категория"
+    )
 
     class Meta:
         db_table = "product"
@@ -43,3 +44,12 @@ class Products(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+    def display_id(self):
+        return f"id: {self.id:05}"
+
+    def sell_price(self):
+        if self.discount:
+            return round(self.price - self.price * self.discount / 100, 2)
+        return self.price
