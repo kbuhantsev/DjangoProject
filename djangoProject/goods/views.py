@@ -25,7 +25,6 @@ def catalog(request, category_slug, page=1) -> HttpResponse:
 
 def product(request, product_slug) -> HttpResponse:
     finded_product = Products.objects.get(slug=product_slug)
-
     context = {"product": finded_product}
 
     return render(request, "goods/product.html", context=context)
