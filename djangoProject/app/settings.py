@@ -42,9 +42,9 @@ INSTALLED_APPS: list[str] = [
     "django.contrib.postgres",
     #
     "debug_toolbar",
-    "main",
-    "goods",
-    "users",
+    "main.apps.MainConfig",
+    "goods.apps.GoodsConfig",
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE: list[str] = [
