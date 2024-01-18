@@ -1,13 +1,16 @@
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.template.loader import render_to_string
 
+from carts.utils import get_user_carts
 from goods.models import Products
 from carts.models import Cart
 
 
-@csrf_exempt
-def cart_add(request, product_slug: str):
-    product = Products.objects.get(slug=product_slug)
+def cart_add(request):
+    product_id = request.POST.get('product_id')
+
+    product = Products.objects.get(id=product_id)
     if request.user.is_authenticated:
         carts = Cart.objects.filter(user=request.user, product=product)
         if carts.exists():
@@ -17,10 +20,21 @@ def cart_add(request, product_slug: str):
                 cart.save()
         else:
             Cart.objects.create(user=request.user, product=product, quantity=1)
-    return redirect(request.META.get('HTTP_REFERER'))
+
+    user_cart = get_user_carts(request)
+    cart_items_html = render_to_string(
+        template_name="carts/includes/included_cart.html", context={"carts": user_cart}, request=request
+    )
+
+    response_data = {
+        "cart_items_html": cart_items_html,
+        "message": "Товар добавлен в корзину"
+    }
+
+    return JsonResponse(response_data)
 
 
-def cart_change(request, product_slug: str):
+def cart_change(request):
     return None
 
 
