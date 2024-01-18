@@ -41,11 +41,10 @@ class Products(models.Model):
         db_table = "product"
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
-        ordering = ("id", )
+        ordering = ("id",)
 
     def __str__(self) -> str:
         return self.name
-
 
     def display_id(self):
         return f"id: {self.id:05}"
