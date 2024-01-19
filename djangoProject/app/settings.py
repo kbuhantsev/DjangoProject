@@ -45,7 +45,8 @@ INSTALLED_APPS: list[str] = [
     "main.apps.MainConfig",
     "goods.apps.GoodsConfig",
     "users.apps.UsersConfig",
-    "carts.apps.CartsConfig"
+    "carts.apps.CartsConfig",
+    "orders.apps.OrdersConfig"
 ]
 
 MIDDLEWARE: list[str] = [
