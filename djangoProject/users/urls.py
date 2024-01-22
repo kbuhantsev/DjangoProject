@@ -40,7 +40,7 @@ urlpatterns: list[URLPattern] = [
         name="password_reset_confirm",
     ),
     path(
-        "accounts/reset/done/",
+        "password-reset/reset/done/",
         PasswordResetCompleteView.as_view(
             template_name="users/password_reset_complete.html"
         ),
