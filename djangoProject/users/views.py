@@ -1,4 +1,5 @@
 from django.contrib import auth, messages
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
@@ -6,7 +7,12 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from carts.models import Cart
-from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
+from users.forms import (
+    ProfileForm,
+    UserLoginForm,
+    UserRegistrationForm,
+    UserChangePasswordForm,
+)
 
 from orders.models import Order, OrderItem
 
@@ -103,3 +109,22 @@ def logout(request):
 @login_required
 def users_cart(request):
     return render(request, "users/users_cart.html")
+
+
+@login_required
+def password_change(request):
+    if request.method == "POST":
+        form = UserChangePasswordForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, "Пароль успешно обновлен")
+            return HttpResponseRedirect(reverse("user:profile"))
+        else:
+            for key, value in form.errors.items():
+                messages.warning(request, value)
+    else:
+        form = UserChangePasswordForm(user=request.user)
+
+    context = {"title": "Home - Смена пароля", "form": form}
+    return render(request, "users/password_change.html", context)

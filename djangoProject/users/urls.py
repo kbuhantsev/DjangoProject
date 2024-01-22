@@ -10,5 +10,5 @@ urlpatterns: list[URLPattern] = [
     path("profile/", views.profile, name="profile"),
     path("logout/", views.logout, name="logout"),
     path("users-cart/", views.users_cart, name="users_cart"),
-
+    path("password-change/", views.password_change, name="password_change"),
 ]

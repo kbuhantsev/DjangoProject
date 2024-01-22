@@ -87,7 +87,11 @@
                                     {% endif %}
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-dark">Сохранить</button>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-dark">Сохранить</button>
+                                <a href="{% url 'user:password_change' %}" class="btn btn-dark"
+                                   >Изменить пароль</a>
+                            </div>
                         </form>
                     </div>
                 </div>
