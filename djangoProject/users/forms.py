@@ -4,6 +4,7 @@ from django.contrib.auth.forms import (
     UserChangeForm,
     UserCreationForm,
     PasswordChangeForm,
+    PasswordResetForm,
 )
 from users.models import User
 
@@ -83,3 +84,9 @@ class UserChangePasswordForm(PasswordChangeForm):
 
     # password1 = forms.CharField()
     # password2 = forms.CharField()
+
+
+# class UserPasswordResetForm(PasswordResetForm):
+#     class Mete:
+#         model = User
+#         fields = ["email"]

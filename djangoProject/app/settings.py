@@ -46,7 +46,7 @@ INSTALLED_APPS: list[str] = [
     "goods.apps.GoodsConfig",
     "users.apps.UsersConfig",
     "carts.apps.CartsConfig",
-    "orders.apps.OrdersConfig"
+    "orders.apps.OrdersConfig",
 ]
 
 MIDDLEWARE: list[str] = [
@@ -154,3 +154,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 LOGIN_URL = "/user/login/"
+
+
+# mail
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
